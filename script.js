@@ -106,11 +106,18 @@ function render() {
       <span class="delete">✖</span>
     `;
 
-    li.querySelector(".delete").onclick = () => {
-      entries.splice(i, 1);
-      localStorage.setItem("soft_" + user, JSON.stringify(entries));
-      render();
-    };
+   li.querySelector(".delete").onclick = () => {
+  entries.splice(i, 1);
+  localStorage.setItem("soft_" + user, JSON.stringify(entries));
+
+  render();
+
+  // 🔥 IMPORTANT: force overview refresh if it's open
+  if (overviewView.style.display === "block") {
+    drawChart();
+  }
+};
+
 
     entryList.appendChild(li);
   });
@@ -167,3 +174,4 @@ function drawChart() {
   insight.innerText =
     `Looks like ${top.split(" ")[0].toLowerCase()} is winning your heart (and wallet) 💸💗`;
 }
+
