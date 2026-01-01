@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SoftSpend</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
+  <div class="login-card">
+    <h2>Welcome 🌸</h2>
+    <p>Your soft money journal</p>
+    <input id="usernameInput" placeholder="Your name">
+    <button id="loginBtn">Enter SoftSpend ✨</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+    <h1 id="greeting">Hi</h1>
+
+    <div class="summary-card">
+      <p>This Month</p>
+      <h2>₹ <span id="netTotal">0</span></h2>
+      <small>income − expense</small>
+    </div>
+
+    <button id="addBtn" class="primary-btn">＋ Add Entry</button>
+    <button id="toggleBtn" class="secondary-btn">View Overview 📊</button>
+
+    <p class="tagline">spending, but gently 🌿</p>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+
+    <!-- HISTORY -->
+    <div id="historyView">
+      <h3>My Purse 👜</h3>
+      <ul id="entryList"></ul>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overviewView" style="display:none">
+      <h3>Monthly Overview</h3>
+
+      <div class="stats-row">
+        <div class="stat-box">💰 Total<br><strong>₹ <span id="statTotal">0</span></strong></div>
+        <div class="stat-box">🍱 Top<br><strong id="statTop">—</strong></div>
+        <div class="stat-box">📒 Entries<br><strong id="statCount">0</strong></div>
+      </div>
+
+      <div class="overview-card">
+        <div class="chart-wrap">
+          <canvas id="chartCanvas" width="300" height="300"></canvas>
+        </div>
+        <div id="legend" class="legend"></div>
+      </div>
+
+      <p class="insight" id="insight"></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Add Entry</h3>
+
+    <div class="type-toggle">
+      <button class="type active" data-type="expense">Expense</button>
+      <button class="type" data-type="income">Income</button>
+    </div>
+
+    <input id="amount" type="number" placeholder="Amount ₹">
+
+    <div id="categoryWrap" class="categories"></div>
+
+    <div class="modes">
+      <button class="mode active">Cash 💵</button>
+      <button class="mode">Phone 💳</button>
+      <button class="mode">Bank 🏦</button>
+    </div>
+
+    <input id="date" type="date">
+
+    <div class="modal-actions">
+      <button id="cancelBtn" class="secondary-btn">Cancel</button>
+      <button id="saveBtn" class="primary-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
