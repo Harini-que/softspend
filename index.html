@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>SoftSpend</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#cdded6">
+  <meta name="theme-color" content="#cdded6">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,14 +26,22 @@
 <!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
 
-  <!-- LEFT -->
+  <!-- LEFT PANEL -->
   <div class="left-panel">
     <h1 id="greeting">Hi</h1>
 
     <div class="summary-card">
       <p>This Month</p>
-      <h2>₹ <span id="netTotal">0</span></h2>
-      <small>income − expense</small>
+
+      <div class="balance-row">
+        <span>💵 Cash</span>
+        <strong>₹ <span id="cashBalance">0</span></strong>
+      </div>
+
+      <div class="balance-row">
+        <span>📱 Phone</span>
+        <strong>₹ <span id="phoneBalance">0</span></strong>
+      </div>
     </div>
 
     <button id="addBtn" class="primary-btn">＋ Add Entry</button>
@@ -39,7 +50,7 @@
     <p class="tagline">spending, but gently 🌿</p>
   </div>
 
-  <!-- RIGHT -->
+  <!-- RIGHT PANEL -->
   <div class="right-panel">
 
     <!-- HISTORY -->
@@ -53,7 +64,7 @@
       <h3>Monthly Overview</h3>
 
       <div class="stats-row">
-        <div class="stat-box">💰 Total<br><strong>₹ <span id="statTotal">0</span></strong></div>
+        <div class="stat-box">💰 Spent<br><strong>₹ <span id="statTotal">0</span></strong></div>
         <div class="stat-box">🍱 Top<br><strong id="statTop">—</strong></div>
         <div class="stat-box">📒 Entries<br><strong id="statCount">0</strong></div>
       </div>
@@ -62,7 +73,7 @@
         <div class="chart-wrap">
           <canvas id="chartCanvas" width="300" height="300"></canvas>
         </div>
-        <div id="legend" class="legend"></div>
+        <div id="legend"></div>
       </div>
 
       <p class="insight" id="insight"></p>
@@ -71,7 +82,7 @@
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- ADD ENTRY MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <h3>Add Entry</h3>
@@ -87,8 +98,7 @@
 
     <div class="modes">
       <button class="mode active">Cash 💵</button>
-      <button class="mode">Phone 💳</button>
-      <button class="mode">Bank 🏦</button>
+      <button class="mode">Phone 📱</button>
     </div>
 
     <input id="date" type="date">
@@ -101,12 +111,10 @@
 </div>
 
 <script src="script.js"></script>
-  <script>
+<script>
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js");
   }
 </script>
-
 </body>
 </html>
-
