@@ -7,18 +7,12 @@ let mode = "Cash 💵";
 const expenseCats = ["Food 🍜","Travel 🚕","Fun 🎧","Other ✨"];
 const incomeCats = ["Salary 💼","Pocket Money 🪙","Gift 🎁"];
 
-const login = document.getElementById("loginScreen");
-const dash = document.getElementById("dashboard");
-
-const historyView = document.getElementById("historyView");
-const overviewView = document.getElementById("overviewView");
-
 loginBtn.onclick = () => {
   user = usernameInput.value.trim();
   if (!user) return;
 
-  login.style.display = "none";
-  dash.style.display = "grid";
+  loginScreen.style.display = "none";
+  dashboard.style.display = "grid";
   greeting.innerText = `Hi ${user} 🌷`;
 
   entries = JSON.parse(localStorage.getItem("soft_" + user)) || [];
@@ -75,9 +69,7 @@ saveBtn.onclick = () => {
 };
 
 toggleBtn.onclick = () => {
-  const showingHistory = historyView.style.display !== "none";
-
-  if (showingHistory) {
+  if (historyView.style.display !== "none") {
     historyView.style.display = "none";
     overviewView.style.display = "block";
     toggleBtn.innerText = "Back to History 📜";
@@ -95,10 +87,17 @@ function render() {
   toggleBtn.innerText = "View Overview 📊";
 
   entryList.innerHTML = "";
-  let income = 0, expense = 0;
+
+  let cash = 0, phone = 0;
+  let spentTotal = 0;
 
   entries.forEach((e, i) => {
-    e.type === "income" ? income += e.amt : expense += e.amt;
+    if (e.type === "income") {
+      e.mode.includes("Cash") ? cash += e.amt : phone += e.amt;
+    } else {
+      e.mode.includes("Cash") ? cash -= e.amt : phone -= e.amt;
+      spentTotal += e.amt;
+    }
 
     const li = document.createElement("li");
     li.innerHTML = `
@@ -116,7 +115,11 @@ function render() {
     entryList.appendChild(li);
   });
 
-  netTotal.innerText = income - expense;
+  cashBalance.innerText = cash;
+  phoneBalance.innerText = phone;
+
+  statTotal.innerText = spentTotal;
+  statCount.innerText = entries.length;
 }
 
 function drawChart() {
@@ -160,9 +163,7 @@ function drawChart() {
   ctx.font="12px Poppins";
   ctx.fillText("this month",150,165);
 
-  statTotal.innerText = sum;
   statTop.innerText = top.split(" ")[0];
-  statCount.innerText = entries.length;
   insight.innerText =
     `Looks like ${top.split(" ")[0].toLowerCase()} is winning your heart (and wallet) 💸💗`;
 }
